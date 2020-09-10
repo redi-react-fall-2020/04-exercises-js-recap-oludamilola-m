@@ -66,20 +66,23 @@ return animals.map((animal)=> {
 };
 // Exercise 4
 const getAnimals = (team) => {
-  return team.reduce((result, {animals}) => {
-    animals.forEach((animal)=> {
-      if (!result.includes(animal)) {
-        result.push(animal)
-      }
-    })
-    return result
-  }, [])
-}
+  // return an array of all animals that exist on all members
+  // Do not include duplicate animals
+
+  //get all animals values
+  //reduce method
+  const res = team.reduce((acc, { animals }) => {
+    return [...acc, ...animals];
+  }, []);
+  return Array.from(new Set(res));
+};
 
 // Exercise 5
 const filterByAnimal = (team, animal) => {
   // only return members who are friends with the animal
-  return team;
+  return team.filter(({animals}) => {
+    return animals.includes(animal);
+  });
 };
 
 export {
